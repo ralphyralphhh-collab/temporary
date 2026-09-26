@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Login — Hinlo Airsoft Zone{% endblock %}
+
+{% block body %}
+    <section class="section login">
+        <h1>Admin Login</h1>
+        {% if error %}
+            <div class="flash flash-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <form method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="_password" required>
+
+            <button type="submit" class="btn">Log in</button>
+        </form>
+    </section>
+{% endblock %}

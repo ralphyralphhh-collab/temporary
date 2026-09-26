@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Join Us — Hinlo Airsoft Zone{% endblock %}
+
+{% block body %}
+    <section class="section join">
+        {# paragraphs/join_intro.txt content moves into a template block
+           or a `content` table — see migration notes #}
+
+        {{ form_start(form) }}
+            {{ form_row(form.fullName) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.phone) }}
+            <button type="submit" class="btn">
+                <span>▣</span> Register
+            </button>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

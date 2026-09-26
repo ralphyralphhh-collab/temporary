@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hinlo Airsoft Zone{% endblock %}
+
+{% block body %}
+    <section class="section news">
+        <h1>WHAT'S NEW?</h1>
+        <p>Welcome to Hinlo Airsoft Zone.</p>
+    </section>
+
+    <section class="section reviews">
+        <h2>What people are saying</h2>
+        {% for review in published_reviews %}
+            <blockquote>
+                <p>{{ review.reviewText }}</p>
+                <cite>— {{ review.reviewerName }} ({{ review.rating }}/5)</cite>
+            </blockquote>
+        {% else %}
+            <p>No reviews yet.</p>
+        {% endfor %}
+    </section>
+{% endblock %}
