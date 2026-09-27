@@ -1,21 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login — Hinlo Airsoft Zone{% endblock %}
+{% block title %}Log In | Hinlo Airsoft Zone{% endblock %}
 
 {% block body %}
-    <section class="section login">
-        <h1>Login</h1>
-        {% if error %}
-            <div class="flash flash-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-        <form method="post">
-            <label for="username">Email</label>
-            <input type="email" id="username" name="_username" value="{{ last_username }}" required>
+    <section class="inner-hero"><div class="container"><h1>LOG IN</h1></div></section>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="_password" required>
+    <section class="account-section">
+        <div class="container">
+            <div class="account-card">
+                <h2>Log In</h2>
+                <p class="subtitle">Customer login</p>
 
-            <button type="submit" class="btn">Log in</button>
-        </form>
+                {% if error %}
+                    <p class="form-note-error" style="text-align:center;margin-bottom:16px;">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </p>
+                {% endif %}
+
+                <form method="post">
+                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                 <input type="email" name="_username" placeholder="Email" value="{{ last_username }}" required autofocus>
+                 <input type="password" name="_password" placeholder="Password" required>
+                 <button class="btn" type="submit">Log In</button>
+                </form>
+
+                <p class="account-footer">Don't have an account? <a href="{{ path('app_customer_register') }}">Sign up</a></p>
+            </div>
+        </div>
     </section>
 {% endblock %}

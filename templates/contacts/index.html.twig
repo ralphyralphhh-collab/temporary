@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts | Hinlo Airsoft Zone{% endblock %}
+
+{% block body %}
+    <section class="inner-hero">
+        <div class="container"><h1>CONTACTS</h1></div>
+    </section>
+
+    <section class="page-section light">
+        <div class="container page-grid">
+            <div>
+                <h2>GET IN TOUCH</h2>
+                <p>Have a question or want to book a session? Send us a message and we'll get back to you.</p>
+                <p>
+                    <strong>Phone:</strong> 091234567890<br>
+                    <strong>Email:</strong> hinloairsoftzone@gmail.com<br>
+                    <strong>Facebook:</strong> Hinloasz
+                </p>
+            </div>
+
+            {{ form_start(form, {'attr': {'class': 'contact-box', 'novalidate': 'novalidate'}}) }}
+                {{ form_widget(form.name, {'attr': {'placeholder': 'Name', 'maxlength': 100}}) }}
+                <span class="field-error">{{ form_errors(form.name) }}</span>
+
+                {{ form_widget(form.email, {'attr': {'placeholder': 'Email', 'maxlength': 150}}) }}
+                <span class="field-error">{{ form_errors(form.email) }}</span>
+
+                {{ form_widget(form.message, {'attr': {'placeholder': 'Message', 'maxlength': 5000}}) }}
+                <span class="field-error">{{ form_errors(form.message) }}</span>
+
+                <button class="btn" type="submit">SEND MESSAGE</button>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

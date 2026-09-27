@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Merch | Hinlo Airsoft Zone{% endblock %}
+
+{% block body %}
+    <section class="inner-hero">
+        <div class="container">
+            <h1>BUY OUR MERCH!</h1>
+
+            {% if is_granted('ROLE_CUSTOMER') %}
+                <a class="btn btn-light btn-auto" href="{{ path('app_account_orders') }}" style="margin-top:20px;">My Orders</a>
+            {% else %}
+                <a class="btn btn-light btn-auto" href="{{ path('app_login') }}" style="margin-top:20px;">Log In to Order</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="page-section">
+        <div class="container">
+            <div class="cards merch-page-grid">
+
+                <article class="info-card">
+                    <img src="{{ asset('assets/merch-bottle.png') }}" alt="Bottle">
+                    <h3>Water Bottle</h3>
+                    <p class="merch-price">₱{{ prices.bottle|default(0)|number_format(2) }}</p>
+                    <p>Durable, reusable water bottle with the Hinlo logo.</p>
+                    <a class="btn" href="{{ path('app_order', {product: 'bottle'}) }}">ORDER</a>
+                </article>
+
+                <article class="info-card">
+                    <img src="{{ asset('assets/merch-bag.png') }}" alt="Bag">
+                    <h3>Tote Bag</h3>
+                    <p class="merch-price">₱{{ prices.bag|default(0)|number_format(2) }}</p>
+                    <p>Sturdy canvas tote for carrying your gear.</p>
+                    <a class="btn" href="{{ path('app_order', {product: 'bag'}) }}">ORDER</a>
+                </article>
+
+                <article class="info-card">
+                    <img src="{{ asset('assets/merch-hoodie.png') }}" alt="Hoodie">
+                    <h3>Hoodie</h3>
+                    <p class="merch-price">₱{{ prices.hoodie|default(0)|number_format(2) }}</p>
+                    <p>Comfortable hoodie for chilly field mornings.</p>
+                    <a class="btn" href="{{ path('app_order', {product: 'hoodie'}) }}">ORDER</a>
+                </article>
+
+                <article class="info-card">
+                    <img src="{{ asset('assets/merch-balaclava.png') }}" alt="Balaclava">
+                    <h3>Balaclava</h3>
+                    <p class="merch-price">₱{{ prices.balaclava|default(0)|number_format(2) }}</p>
+                    <p>Tactical balaclava for extra field coverage.</p>
+                    <a class="btn" href="{{ path('app_order', {product: 'balaclava'}) }}">ORDER</a>
+                </article>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

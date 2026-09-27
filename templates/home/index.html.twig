@@ -3,20 +3,105 @@
 {% block title %}Hinlo Airsoft Zone{% endblock %}
 
 {% block body %}
+
     <section class="section news">
-        <h1>WHAT'S NEW?</h1>
-        <p>Welcome to Hinlo Airsoft Zone.</p>
+        <div class="news-grid">
+            <div class="news-copy fade-up">
+                <h1>WHAT'S NEW?</h1>
+                <p>We've added exciting new features to make your experience even better at our airsoft zone. You can now rent high-quality airsoft guns, grab cool souvenirs to remember your visit, and enjoy more convenience when playing. Plus, you can officially become part of our growing community by signing up as a member.</p>
+            </div>
+            <div class="news-image fade-in"></div>
+        </div>
+    </section>
+
+    <section class="section community">
+        <div class="community-grid">
+            <div class="community-image"></div>
+            <div class="community-copy fade-up">
+                <h2>JOIN OUR COMMUNITY!</h2>
+                <p>Join our community and take your airsoft experience to the next level. As a member, you'll get exclusive access to events, updates, and special perks while connecting with fellow players who share the same passion.</p>
+                <a class="btn" href="{{ path('app_join') }}">
+                    <span>▣</span>
+                    Register
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section merch">
+        <div class="container merch-inner">
+            <h2>BUY OUR MERCH!</h2>
+            <div class="merch-grid">
+                <a class="merch-card" href="{{ path('app_merch') }}"><img src="{{ asset('assets/merch-bottle.png') }}" alt="Hinlo bottle"></a>
+                <a class="merch-card" href="{{ path('app_merch') }}"><img src="{{ asset('assets/merch-bag.png') }}" alt="Hinlo tote bag"></a>
+                <a class="merch-card" href="{{ path('app_merch') }}"><img src="{{ asset('assets/merch-hoodie.png') }}" alt="Hinlo hoodie"></a>
+                <a class="merch-card" href="{{ path('app_merch') }}"><img src="{{ asset('assets/merch-balaclava.png') }}" alt="Hinlo balaclava"></a>
+            </div>
+            <div class="merch-action">
+                <a class="btn btn-light" href="{{ path('app_merch') }}">
+                    <span class="arrow">→</span>
+                    ORDER NOW!
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section about">
+        <div class="about-grid">
+            <div class="about-image"></div>
+            <div class="about-copy fade-up">
+                <h2>ABOUT US</h2>
+                <p>Our airsoft zone is built for players who are passionate about action, teamwork, and fun. We provide a safe and exciting environment where both beginners and experienced players can enjoy the game.</p>
+                <a class="learn" href="{{ path('app_about') }}">
+                    → &nbsp;Learn More
+                </a>
+            </div>
+        </div>
     </section>
 
     <section class="section reviews">
-        <h2>What people are saying</h2>
-        {% for review in published_reviews %}
-            <blockquote>
-                <p>{{ review.reviewText }}</p>
-                <cite>— {{ review.reviewerName }} ({{ review.rating }}/5)</cite>
-            </blockquote>
-        {% else %}
-            <p>No reviews yet.</p>
-        {% endfor %}
+        <div class="container reviews-grid">
+
+            {{ form_start(review_form, {'attr': {'class': 'review-form', 'novalidate': 'novalidate'}}) }}
+                {{ form_label(review_form.reviewerName, 'Your name:') }}
+                {{ form_widget(review_form.reviewerName, {'attr': {'maxlength': 100}}) }}
+                <span class="field-error">{{ form_errors(review_form.reviewerName) }}</span>
+
+                {{ form_label(review_form.rating, 'Rating:') }}
+                {{ form_widget(review_form.rating) }}
+
+                {{ form_label(review_form.reviewText, 'Write a review:') }}
+                {{ form_widget(review_form.reviewText, {'attr': {'maxlength': 2000}}) }}
+                <span class="field-error">{{ form_errors(review_form.reviewText) }}</span>
+
+                <button class="btn" type="submit">Submit review</button>
+            {{ form_end(review_form) }}
+
+            {% if published_reviews is empty %}
+                <article class="review-card">
+                    <span class="stars">★★★★★</span>
+                    <h3>AMAZING!</h3>
+                    <p>Good community, amazing staff and overall good vibes.</p>
+                    <div class="reviewer">
+                        <img src="{{ asset('assets/reviewer.png') }}" alt="Reviewer">
+                        <span>Reviewer name<br><small>Date</small></span>
+                    </div>
+                </article>
+            {% else %}
+                {% for review in published_reviews %}
+                    <article class="review-card">
+                        <span class="stars">{% for i in 1..5 %}{{ i <= review.rating ? '★' : '☆' }}{% endfor %}</span>
+                        <h3>{{ review.rating >= 4 ? 'AMAZING!' : 'GOOD!' }}</h3>
+                        <p>{{ review.reviewText }}</p>
+                        <div class="reviewer">
+                            <img src="{{ asset('assets/reviewer.png') }}" alt="Reviewer">
+                            <span>{{ review.reviewerName }}<br><small>{{ review.createdAt|date('M j, Y') }}</small></span>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% endif %}
+
+        </div>
     </section>
+
 {% endblock %}

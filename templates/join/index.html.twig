@@ -1,19 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Join Us — Hinlo Airsoft Zone{% endblock %}
+{% block title %}Join Us | Hinlo Airsoft Zone{% endblock %}
 
 {% block body %}
-    <section class="section join">
-        {# paragraphs/join_intro.txt content moves into a template block
-           or a `content` table — see migration notes #}
 
-        {{ form_start(form) }}
-            {{ form_row(form.fullName) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.phone) }}
-            <button type="submit" class="btn">
-                <span>▣</span> Register
-            </button>
-        {{ form_end(form) }}
+    <section class="inner-hero">
+        <div class="container">
+            <h1>JOIN OUR COMMUNITY!</h1>
+        </div>
     </section>
+
+    <section class="page-section">
+        <div class="container page-grid">
+
+            <div>
+                <h2>REGISTER</h2>
+                <p>Join our community and take your airsoft experience to the next level. As a member, you'll get exclusive access to events, updates, and special perks while connecting with fellow players.</p>
+
+                {{ form_start(form, {'attr': {'class': 'contact-box', 'novalidate': 'novalidate'}}) }}
+                    {{ form_widget(form.fullName, {'attr': {'placeholder': 'Full name', 'maxlength': 100}}) }}
+                    <span class="field-error">{{ form_errors(form.fullName) }}</span>
+
+                    {{ form_widget(form.email, {'attr': {'placeholder': 'Email address', 'maxlength': 150}}) }}
+                    <span class="field-error">{{ form_errors(form.email) }}</span>
+
+                    {{ form_widget(form.phone, {'attr': {'placeholder': 'Contact number', 'maxlength': 30}}) }}
+                    <span class="field-error">{{ form_errors(form.phone) }}</span>
+
+                    <button class="btn" type="submit">
+                        ▣ Register
+                    </button>
+                {{ form_end(form) }}
+            </div>
+
+            <div class="feature-image">
+                <img src="{{ asset('assets/community-soldier.png') }}" alt="Airsoft player">
+            </div>
+
+        </div>
+    </section>
+
 {% endblock %}

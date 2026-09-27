@@ -7,21 +7,52 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    {# Replaces partials/header.php #}
-    {% include 'partials/_header.html.twig' %}
+
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="brand" href="{{ path('app_home') }}" aria-label="Hinlo Airsoft Zone home">
+          <img src="{{ asset('assets/logo.png') }}" alt="Hinlo Airsoft Zone logo">
+          <span>HINLO AIRSOFT ZONE</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+        <nav class="main-nav">
+          <a class="{{ app.current_route == 'app_home' ? 'active' }}" href="{{ path('app_home') }}">HOME</a>
+          <a class="{{ app.current_route == 'app_about' ? 'active' }}" href="{{ path('app_about') }}">ABOUT US</a>
+          <a class="{{ app.current_route == 'app_join' ? 'active' }}" href="{{ path('app_join') }}">JOIN US</a>
+          <a class="{{ app.current_route == 'app_contacts' ? 'active' }}" href="{{ path('app_contacts') }}">CONTACTS</a>
+          <a class="nav-cta" href="{{ path('app_join') }}">JOIN US</a>
+        </nav>
+      </div>
+    </header>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
 
     <main>
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="flash flash-{{ label }}">{{ message }}</div>
-            {% endfor %}
-        {% endfor %}
-
         {% block body %}{% endblock %}
     </main>
 
-    {# Replaces partials/footer.php #}
-    {% include 'partials/_footer.html.twig' %}
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <img src="{{ asset('assets/logo.png') }}" alt="Hinlo Airsoft Zone logo">
+          <div class="contact-list">
+            <div><span class="icon">⌕</span>091234567890</div>
+            <div><span class="icon">✉</span>hinloairsoftzone@gmail.com</div>
+            <div><span class="icon">f</span>Hinloasz</div>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3>Options:</h3>
+          <a href="{{ path('app_rent') }}">Rent Gun</a>
+          <a href="{{ path('app_merch') }}">Merch</a>
+          <a href="{{ path('app_join') }}">Join Community</a>
+        </div>
+      </div>
+    </footer>
 
     <script src="{{ asset('js/main.js') }}"></script>
 </body>

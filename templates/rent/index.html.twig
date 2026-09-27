@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rent Gun | Hinlo Airsoft Zone{% endblock %}
+
+{% block body %}
+    <section class="inner-hero">
+        <div class="container"><h1>RENT A GUN</h1></div>
+    </section>
+
+    <section class="page-section">
+        <div class="container page-grid">
+            <div>
+                <h2>QUALITY GEAR, EASY RENTAL.</h2>
+                <p>Rent high-quality airsoft guns for your session — well-maintained, ready to go, and available for every skill level.</p>
+                <a class="btn" href="{{ path('app_contacts') }}">CONTACT US</a>
+            </div>
+            <div class="feature-image">
+                <img src="{{ asset('assets/hero-rifle.png') }}" alt="Airsoft rental equipment">
+            </div>
+        </div>
+    </section>
+{% endblock %}

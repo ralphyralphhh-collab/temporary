@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign Up | Hinlo Airsoft Zone{% endblock %}
+
+{% block body %}
+    <section class="inner-hero"><div class="container"><h1>CREATE AN ACCOUNT</h1></div></section>
+
+    <section class="account-section">
+        <div class="container">
+            <div class="account-card">
+                <h2>Sign Up</h2>
+                <p class="subtitle">Create your Hinlo Airsoft Zone account</p>
+
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    {{ form_widget(form.fullName, {'attr': {'placeholder': 'Full name'}}) }}
+                    <span class="field-error">{{ form_errors(form.fullName) }}</span>
+
+                    {{ form_widget(form.email, {'attr': {'placeholder': 'Email address'}}) }}
+                    <span class="field-error">{{ form_errors(form.email) }}</span>
+
+                    {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'Password'}}) }}
+                    <span class="field-error">{{ form_errors(form.plainPassword.first) }}</span>
+
+                    {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'Confirm password'}}) }}
+                    <span class="field-error">{{ form_errors(form.plainPassword.second) }}</span>
+
+                    <button class="btn" type="submit">Sign Up</button>
+                {{ form_end(form) }}
+
+                <p class="account-footer">Already have an account? <a href="{{ path('app_login') }}">Log in</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
